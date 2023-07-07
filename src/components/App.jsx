@@ -69,7 +69,7 @@ export const App = () => {
 
   const visibleContacts = getVisibleContact();
   return (
-    <section className={css.contacts}>
+    <section className={css.contactsStyle}>
       <h2 className={css.title}>Phonebook</h2>
       <ContactForm contactData={addContact} />
       <h2 className={css.title}>Contacts</h2>
