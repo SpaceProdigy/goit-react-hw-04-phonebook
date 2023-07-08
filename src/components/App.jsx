@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
 import css from './Contacts.module.css';
 import { ContactForm, Filter, ContactList } from '.';
+import contactsData from '../Data/contacts.json';
 
 const toastConfig = {
   position: 'top-right',
@@ -17,17 +18,11 @@ const toastConfig = {
 };
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const contsctsJSON = localStorage.getItem('contacts');
+  const parsContacts = JSON.parse(contsctsJSON);
+  const startContacts = parsContacts.length > 0 ? parsContacts : contactsData;
+  const [contacts, setContacts] = useState(startContacts);
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const contsctsJSON = localStorage.getItem('contacts');
-    const parsContacts = JSON.parse(contsctsJSON) ?? [];
-
-    if (parsContacts.length !== 0) {
-      setContacts(parsContacts);
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
